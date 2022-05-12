@@ -1,0 +1,38 @@
+.ddom-nav-container {
+    padding-top: 100px;
+}
+.phases-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+
+}
+
+.phase-block.first {
+    position: relative;
+
+}
+
+.phase-body {
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    width: 140px;
+    margin-left: 9em;
+
+}
+
+.phase-body img {
+    width: 80px;
+}
+
+.sub-header {
+    width: 120px;
+}
+
+
+.svg_position {
+    right: 120px;
+    height: 6em;
+    width: 8.5em;
+}

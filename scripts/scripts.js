@@ -685,9 +685,16 @@ function defaultSpectrumTypography(doc) {
   });
 
   const heading2 = doc.querySelectorAll('h2');
-  heading1.forEach(h2 => {
+  heading2.forEach(h2 => {
     h2.classList.add('spectrum-Heading--sizeXL');
-  })
+  });
+
+  const heading3 = doc.querySelectorAll('h3');
+  heading3.forEach(h3 => {
+    h3.classList.add('spectrum-Heading--sizeL');
+  });
+
+  doc.querySelector('body').classList.add('spectrum-Body', 'spectrum-Body--sizeM')
 }
 
 /**

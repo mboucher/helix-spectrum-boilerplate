@@ -9,3 +9,29 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
+
+ html {
+    text-rendering: optimizelegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+ body {
+    margin: 0;
+    padding: 0;
+
+  }
+
+ body.appear {
+    display: unset;
+  }
+
+ header {
+    height: 64px;
+  }
+
+ main {
+
+    padding: 64px;
+    min-height: calc(100vh - 300px);
+    background-color: var(--spectrum-global-color-gray-100);
+  }
