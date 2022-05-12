@@ -670,6 +670,27 @@ async function loadEager(doc) {
 }
 
 /**
+ * Apply Spectrum Typography
+ */
+
+function defaultSpectrumTypography(doc) {
+  const headings = doc.querySelectorAll('h1,h2,h3,h4');
+  headings.forEach(heading => {
+    heading.classList.add('spectrum-Heading');
+  })
+  
+  const heading1 = doc.querySelectorAll('h1');
+  heading1.forEach(h1 => {
+    h1.classList.add('spectrum-Heading--sizeXXL');
+  });
+
+  const heading2 = doc.querySelectorAll('h2');
+  heading1.forEach(h2 => {
+    h2.classList.add('spectrum-Heading--sizeXL');
+  })
+}
+
+/**
  * loads everything that doesn't need to be delayed.
  */
 async function loadLazy(doc) {
@@ -681,6 +702,7 @@ async function loadLazy(doc) {
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   addFavIcon(`${window.hlx.codeBasePath}/styles/favicon.svg`);
+  defaultSpectrumTypography(doc);
 
 }
 

@@ -343,6 +343,11 @@
   dependencies:
     "@spectrum-css/vars" "^8.0.0"
 
+"@spectrum-css/typography@^4.0.18":
+  version "4.0.18"
+  resolved "https://registry.yarnpkg.com/@spectrum-css/typography/-/typography-4.0.18.tgz#ab9a68815afb42860726007198d47f9298c6bb4c"
+  integrity sha512-NRv2R3/hG6DkY/mxqnTtdu4D+NLKWohNW6s2QkafbEEiIJxl0Kvx7vkl5aaseVGyDHT/f+/hUUCgkgBYEOgt/Q==
+
 "@spectrum-css/vars@^8.0.0":
   version "8.0.0"
   resolved "https://registry.yarnpkg.com/@spectrum-css/vars/-/vars-8.0.0.tgz#b88a3b1165b63de50ab01f20ccafb42115d67443"
