@@ -11,6 +11,12 @@
 
 }
 
+.phase-block a {
+    text-decoration: none;
+    color: black;
+
+}
+
 .phase-body {
     display: flex;
     flex-direction: column;
