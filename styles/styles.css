@@ -30,8 +30,14 @@
   }
 
  main {
-
-    padding: 64px;
+    padding-top: 64px;
+    padding-bottom: 64px;
     min-height: calc(100vh - 300px);
-    background-color: var(--spectrum-global-color-gray-100);
   }
+
+  .section > div {
+    max-width: 1400px;
+    margin: auto;
+  }
+
+

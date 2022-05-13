@@ -1,6 +1,4 @@
-.ddom-nav-container {
-    padding-top: 100px;
-}
+
 .phases-container {
     display: flex;
     flex-direction: row;
@@ -23,7 +21,7 @@
 }
 
 .phase-body img {
-    width: 80px;
+    width: 60px;
 }
 
 .sub-header {
@@ -33,6 +31,6 @@
 
 .svg_position {
     right: 120px;
-    height: 6em;
-    width: 8.5em;
+    height: 5em;
+    width: 6.5em;
 }

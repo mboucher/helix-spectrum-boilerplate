@@ -9,13 +9,13 @@ export default function decorate(block) {
             const items = element.querySelectorAll('div');
             items.forEach((item,i) => {
                 if(i === 0) {
-                    item.classList.add('phase-header', 'spectrum-Heading' ,'spectrum-Heading--sizeXL');
+                    item.classList.add('phase-header', 'spectrum-Heading' ,'spectrum-Heading--sizeL');
                 }
                 if(i === 1) {
                     item.classList.add('icon');
                 }
                 if(i === 2) {
-                    item.classList.add('sub-header');
+                    item.classList.add('sub-header', 'spectrum-Body', 'spectrum-Body--sizeS');
                 }
                 wrapper.appendChild(item);
             })

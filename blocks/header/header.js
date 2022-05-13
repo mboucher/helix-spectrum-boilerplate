@@ -32,30 +32,46 @@ export default async function decorate(block) {
     const html = await resp.text(); 
 
     // decorate nav DOM
-    const nav = document.createElement('div');
+    const nav = document.createElement('nav');
     nav.classList.add('nav');
     nav.setAttribute('aria-role', 'navigation');
     nav.innerHTML = html;
-    
+
+
+    //decorate the nav branding
     const container = nav.querySelector('div');
     container.classList.add('nav-branding-container');
+    const brandingAnchor = document.createElement('a');
+    brandingAnchor.href='/';
+    brandingAnchor.classList.add('branding-wrapper');
+    
     const logo = document.createElement('div');
     logo.classList.add('header-logo');
     logo.innerHTML= BRAND_IMG;
-    container.prepend(logo);
+    brandingAnchor.append(logo);
 
-    
+    const brandTextContainer = document.createElement('div');
+    brandTextContainer.classList.add('brand-text-container');
     const brandText = container.querySelectorAll('.branding > div');
     brandText[0].classList.add('spectrum-Heading', 'spectrum-Heading--sizeM');
+    brandTextContainer.append(brandText[0]);
     brandText[1].classList.add('spectrum-Detail', 'spectrum-Detail--sizeM');
+    brandTextContainer.append(brandText[1]);
+    brandingAnchor.append(brandTextContainer);
+
+    const branding = container.querySelector('.branding');
+    branding.innerHTML='';
+    branding.append(brandingAnchor);
 
     const navSections = nav.querySelectorAll('.nav-sections > div');
     navSections.forEach(section => {
       section.classList.add('nav-section', 'has-Menu');
       section.setAttribute('aria-expanded', 'false');
+      section.querySelectorAll('a').forEach(link=> {
+        link.href = new URL(link.href).pathname;
+      })
       section.addEventListener('click', () => {
         const expanded = section.getAttribute('aria-expanded') === 'true';
-        
         collapseAllNavSections(nav);
         section.setAttribute('aria-expanded', expanded ? 'false' : 'true');
         
@@ -80,5 +96,5 @@ export default async function decorate(block) {
   nav.setAttribute('aria-expanded', 'false');
   decorateIcons(nav);
   block.append(nav);
-  
+
   }
