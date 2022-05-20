@@ -6,13 +6,16 @@
 handing login....
 
 <script type="module">
+  const { protocol, host } = new URL(window.location.href);
+  const redirectUri = `${protocol}//${host}/login.html`;
+
   const config = {
     // Required config
     issuer: 'https://adobe-stage.okta.com/',
 
     // Required for login flow using getWithRedirect()
     clientId: '0oa1l48ecnmeC8Bto1d8',
-    redirectUri: 'http://localhost:3000/login',
+    redirectUri,
 
     // Parse authorization code from hash fragment instead of search query
     responseMode: 'fragment',
