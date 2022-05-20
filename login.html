@@ -1,5 +1,54 @@
 <html>
+<head>
+    <script src="https://global.oktacdn.com/okta-auth-js/6.5.1/okta-auth-js.min.js" type="text/javascript"></script>
+</head>
 <body>
-hello
+handing login....
+
+<script type="module">
+  const config = {
+    // Required config
+    issuer: 'https://adobe-stage.okta.com/',
+
+    // Required for login flow using getWithRedirect()
+    clientId: '0oa1l48ecnmeC8Bto1d8',
+    redirectUri: 'http://localhost:3000/login',
+
+    // Parse authorization code from hash fragment instead of search query
+    responseMode: 'fragment',
+
+    // Configure TokenManager to use sessionStorage instead of localStorage
+    tokenManager: {
+      storage: 'sessionStorage'
+    }
+  };
+
+  async function run() {
+    const authClient = new OktaAuth(config);
+
+    if (authClient.isLoginRedirect()) {
+      console.log('is login redirect');
+      try {
+        await authClient.handleLoginRedirect();
+      } catch (e) {
+        // log or display error details
+        document.body.innerText = e;
+        console.log(e);
+      }
+    } else if (!await authClient.isAuthenticated()) {
+      document.body.innerText = 'not authenticated, redirecting to okta....';
+      console.log('not authenticated, redirecting to okta....');
+      // Start the browser based oidc flow, then parse tokens from the redirect callback url
+      authClient.signInWithRedirect();
+    } else {
+      document.body.innerText = 'user authenticated.';
+      // User is authenticated
+      console.log(await authClient.token.getUserInfo());
+    }
+  }
+
+  run().then(console.log).catch(console.error);
+
+</script>
 </body>
 </html>
