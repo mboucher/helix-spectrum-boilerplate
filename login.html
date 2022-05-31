@@ -1,0 +1,86 @@
+<html>
+<head>
+    <script src="https://global.oktacdn.com/okta-auth-js/6.5.1/okta-auth-js.min.js" type="text/javascript"></script>
+</head>
+<body>
+handing login....
+
+<script type="module">
+  const { protocol, host } = new URL(window.location.href);
+  const redirectUri = `${protocol}//${host}/login.html`;
+  const postLogoutRedirectUri = `${protocol}//${host}/`;
+
+  const config = {
+    // Required config
+    issuer: 'https://adobe-stage.okta.com/',
+
+    // Required for login flow using getWithRedirect()
+    clientId: '0oa1l48ecnmeC8Bto1d8',
+    redirectUri,
+    postLogoutRedirectUri,
+
+    // Parse authorization code from hash fragment instead of search query
+    responseMode: 'fragment',
+    responseType: ['id_token'],
+
+    cookies: {
+      // secure: true,
+      sameSite: true,
+    },
+
+    // Configure TokenManager to use sessionStorage instead of localStorage
+    tokenManager: {
+      storage: 'cookie'
+    }
+  };
+
+  async function run() {
+    const authClient = new OktaAuth(config);
+
+    async function showLoggedIn() {
+      try {
+        const userInfo = await authClient.token.getUserInfo();
+        const btn = document.createElement('button');
+        btn.innerText = 'logout';
+        btn.onclick = () => authClient.signOut();
+
+        const div = document.createElement('div');
+        div.innerText = `user authenticated: ${userInfo.name} <${userInfo.email}>`;
+        div.appendChild(btn);
+        document.body.appendChild(div);
+      } catch (e) {
+        // log or display error details
+        document.body.innerText = e;
+        console.log(e);
+      }
+    }
+
+
+    if (authClient.isLoginRedirect()) {
+      console.log('is login redirect');
+      try {
+        const res = await authClient.handleLoginRedirect();
+        console.log('handled login redirect...', res);
+        document.body.innerText = 'and now?';
+        await showLoggedIn();
+
+      } catch (e) {
+        // log or display error details
+        document.body.innerText = e;
+        console.log(e);
+      }
+    } else if (!await authClient.isAuthenticated()) {
+      document.body.innerText = 'not authenticated, redirecting to okta....';
+      console.log('not authenticated, redirecting to okta....');
+      // Start the browser based oidc flow, then parse tokens from the redirect callback url
+      authClient.signInWithRedirect();
+    } else {
+      await showLoggedIn();
+    }
+  }
+
+  run().then(console.log).catch(console.error);
+
+</script>
+</body>
+</html>
